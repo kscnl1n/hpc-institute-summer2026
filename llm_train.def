@@ -1,0 +1,18 @@
+Bootstrap: docker
+From: pytorch/pytorch:2.8.0-cuda12.9-cudnn9-runtime
+
+%files
+    train.py /workspace/train.py
+    data.txt /workspace/data.txt
+
+%post
+    mkdir -p /workspace
+    chmod +x /workspace/train.py
+
+%environment
+    export PYTHONUNBUFFERED=1
+    export LC_ALL=C
+
+%runscript
+    cd /workspace
+    exec python train.py --input data.txt --epochs 5 "$@"
