@@ -1,6 +1,15 @@
 # This is an example training file we'll use using to demonstrate docker.
 # It is a simple llm that is trained on a corpus of text- it requires Pytorch, which we will bundle into its docker container.
 
+/* 
+EXAMPLE TRAINING TEXT
+
+Machine learning is a field of computer science focused on building systems that learn from data.
+Large language models predict the next token in a sequence and improve through optimization.
+This is a tiny demo dataset, so the results will be rough, repetitive, and only useful for learning.
+
+*/
+
 import argparse
 import math
 from pathlib import Path
