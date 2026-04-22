@@ -1,0 +1,38 @@
+Bootstrap: debootstrap
+OSVersion: jammy
+MirrorURL: http://archive.ubuntu.com/ubuntu/
+
+%labels
+    Author Kaylee Scanlin
+    Description Tiny PyTorch LLM training container
+    Version v1.0
+
+%files
+    llm-train.py /opt/app/llm-train.py
+
+%post
+    apt-get update && apt-get install -y \
+        python3 \
+        python3-pip \
+        python3-venv \
+        ca-certificates \
+        && apt-get clean
+
+    mkdir -p /opt/app /workspace
+    chmod +x /opt/app/llm-train.py
+
+    python3 -m pip install --upgrade pip
+    python3 -m pip install torch
+
+%environment
+    export APP_HOME=/opt/app
+    export PATH=/opt/app:$PATH
+    export PYTHONUNBUFFERED=1
+
+%runscript
+    cd /workspace
+    exec python3 /opt/app/llm-train.py "$@"
+
+%test
+    python3 --version
+    python3 -c "import torch; print(torch.__version__)"
