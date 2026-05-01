@@ -15,4 +15,4 @@ From: pytorch/pytorch:2.8.0-cuda12.9-cudnn9-runtime
 
 %runscript
     cd /workspace
-    exec python train.py --input data.txt --epochs 5 "$@"
+    exec python llm-train.py --input data.txt --epochs 5 "$@"
